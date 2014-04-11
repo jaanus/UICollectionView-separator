@@ -53,8 +53,8 @@
 		EAE051DD18F823460050A660 /* UICollectionView-separatorTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "UICollectionView-separatorTests-Info.plist"; sourceTree = "<group>"; };
 		EAE051DF18F823460050A660 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EAE051E118F823460050A660 /* UICollectionView_separatorTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UICollectionView_separatorTests.m; sourceTree = "<group>"; };
-		EAE051EB18F8246D0050A660 /* JKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JKViewController.h; path = ../JKViewController.h; sourceTree = "<group>"; };
-		EAE051EC18F8246D0050A660 /* JKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JKViewController.m; path = ../JKViewController.m; sourceTree = "<group>"; };
+		EAE051EB18F8246D0050A660 /* JKViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKViewController.h; sourceTree = "<group>"; };
+		EAE051EC18F8246D0050A660 /* JKViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
