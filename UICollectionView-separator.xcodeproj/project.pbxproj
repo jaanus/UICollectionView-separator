@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA88F34D18F873F800E6E4FE /* JKCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EA88F34C18F873F800E6E4FE /* JKCell.m */; };
 		EAE051B418F823460050A660 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE051B318F823460050A660 /* Foundation.framework */; };
 		EAE051B618F823460050A660 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE051B518F823460050A660 /* CoreGraphics.framework */; };
 		EAE051B818F823460050A660 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE051B718F823460050A660 /* UIKit.framework */; };
@@ -35,6 +36,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EA88F34B18F873F800E6E4FE /* JKCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JKCell.h; sourceTree = "<group>"; };
+		EA88F34C18F873F800E6E4FE /* JKCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JKCell.m; sourceTree = "<group>"; };
 		EAE051B018F823460050A660 /* UICollectionView-separator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "UICollectionView-separator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE051B318F823460050A660 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EAE051B518F823460050A660 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -118,6 +121,8 @@
 				EAE051C318F823460050A660 /* JKAppDelegate.m */,
 				EAE051EB18F8246D0050A660 /* JKViewController.h */,
 				EAE051EC18F8246D0050A660 /* JKViewController.m */,
+				EA88F34B18F873F800E6E4FE /* JKCell.h */,
+				EA88F34C18F873F800E6E4FE /* JKCell.m */,
 				EAE051C518F823460050A660 /* Main_iPhone.storyboard */,
 				EAE051C818F823460050A660 /* Main_iPad.storyboard */,
 				EAE051CE18F823460050A660 /* Images.xcassets */,
@@ -254,6 +259,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA88F34D18F873F800E6E4FE /* JKCell.m in Sources */,
 				EAE051C018F823460050A660 /* main.m in Sources */,
 				EAE051ED18F8246D0050A660 /* JKViewController.m in Sources */,
 				EAE051C418F823460050A660 /* JKAppDelegate.m in Sources */,
@@ -471,6 +477,7 @@
 				EAE051E718F823460050A660 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		EAE051E818F823460050A660 /* Build configuration list for PBXNativeTarget "UICollectionView-separatorTests" */ = {
 			isa = XCConfigurationList;
@@ -479,6 +486,7 @@
 				EAE051EA18F823460050A660 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

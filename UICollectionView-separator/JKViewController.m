@@ -6,11 +6,26 @@
 //  Copyright (c) 2014 Jaanus Kase. All rights reserved.
 //
 
+
+
 #import "JKViewController.h"
+#import "JKCell.h"
+
+
+
+static NSUInteger showWithoutSeparator = 3;
+static NSUInteger showWithSeparator = 50;
+
+
 
 @interface JKViewController ()
 
+@property (nonatomic, assign) BOOL showBelowSeparator;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *showSeparatorBarButtonItem;
+
 @end
+
+
 
 @implementation JKViewController
 
@@ -19,6 +34,9 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+		
+		_showBelowSeparator = NO;
+		
     }
     return self;
 }
@@ -39,11 +57,27 @@
 
 
 
+#pragma mark - Getter/setter methods
+
+- (void) setShowBelowSeparator:(BOOL)showBelowSeparator
+{
+	if (showBelowSeparator != _showBelowSeparator) {
+		_showBelowSeparator = showBelowSeparator;
+		if (_showBelowSeparator) {
+			self.showSeparatorBarButtonItem.title = @"Separator off";
+		} else {
+			self.showSeparatorBarButtonItem.title = @"Separator on";
+		}
+	}
+}
+
+
+
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-	return 300;
+	return self.showBelowSeparator ? showWithSeparator : showWithoutSeparator;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -53,7 +87,8 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-	UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+	JKCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+	cell.label.text = [NSString stringWithFormat:@"Cell #%ld", (long)indexPath.row];
 	return cell;
 }
 
@@ -67,5 +102,18 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
+
+#pragma mark - Bar item actions
+
+- (IBAction)didTapSeparatorSwitch:(UIBarButtonItem *)sender {
+	NSLog(@"wat: %@", sender);
+	self.showBelowSeparator = !self.showBelowSeparator;
+	[self.collectionView reloadData];
+}
+
+
+
 
 @end
