@@ -10,17 +10,22 @@
 
 #import "JKViewController.h"
 #import "JKCell.h"
+#import "JKSeparatorLayout.h"
 
 
 
-static NSUInteger showWithoutSeparator = 3;
-static NSUInteger showWithSeparator = 50;
+NSString *const separatorReuseIdentifier = @"Separator";
 
 
 
-@interface JKViewController ()
+static NSUInteger numberOfItemsWithoutSeparator = 3;
+static NSUInteger numberOfItemsWithSeparator = 50;
 
-@property (nonatomic, assign) BOOL showBelowSeparator;
+
+
+@interface JKViewController () <JKSeparatorLayoutDelegate>
+
+@property (nonatomic, assign) BOOL expanded;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *showSeparatorBarButtonItem;
 
 @end
@@ -33,10 +38,7 @@ static NSUInteger showWithSeparator = 50;
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
-		
-		_showBelowSeparator = NO;
-		
+		_expanded = NO;
     }
     return self;
 }
@@ -46,24 +48,21 @@ static NSUInteger showWithSeparator = 50;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 	
-	NSLog(@"did load");
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+	// Register the separator class.
+	[self.collectionView registerClass:[UICollectionReusableView class]
+			forSupplementaryViewOfKind:SeparatorViewKind
+				   withReuseIdentifier:@"Separator"];
 }
 
 
 
 #pragma mark - Getter/setter methods
 
-- (void) setShowBelowSeparator:(BOOL)showBelowSeparator
+- (void) setExpanded:(BOOL)expanded
 {
-	if (showBelowSeparator != _showBelowSeparator) {
-		_showBelowSeparator = showBelowSeparator;
-		if (_showBelowSeparator) {
+	if (expanded != _expanded) {
+		_expanded = expanded;
+		if (_expanded) {
 			self.showSeparatorBarButtonItem.title = @"Separator off";
 		} else {
 			self.showSeparatorBarButtonItem.title = @"Separator on";
@@ -77,12 +76,37 @@ static NSUInteger showWithSeparator = 50;
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-	return self.showBelowSeparator ? showWithSeparator : showWithoutSeparator;
+	return self.expanded ? numberOfItemsWithSeparator : numberOfItemsWithoutSeparator;
 }
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
 	return 1;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+	UICollectionReusableView *separator = [collectionView dequeueReusableSupplementaryViewOfKind:kind withReuseIdentifier:separatorReuseIdentifier forIndexPath:indexPath];
+	
+	if ([kind isEqualToString:SeparatorViewKind]) {
+		separator.backgroundColor = [UIColor clearColor];
+		
+		if (!separator.subviews.count) {
+			UIView *line = [[UIView alloc] init];
+			line.translatesAutoresizingMaskIntoConstraints = NO;
+			line.backgroundColor = [UIColor whiteColor];
+			[separator addSubview:line];
+			
+			// Oh man. This autolayout syntax.
+			// This makes the line be fixed height, vertically centered, and with margin on left and right.
+			[separator addConstraint:[NSLayoutConstraint constraintWithItem:line attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:1]];
+			[separator addConstraint:[NSLayoutConstraint constraintWithItem:line attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:separator attribute:NSLayoutAttributeCenterY multiplier:1 constant:0]];
+			[separator addConstraint:[NSLayoutConstraint constraintWithItem:line attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:separator attribute:NSLayoutAttributeLeft multiplier:1 constant:20]];
+			[separator addConstraint:[NSLayoutConstraint constraintWithItem:line attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:separator attribute:NSLayoutAttributeRight multiplier:1 constant:-20]];
+		}	
+	}
+		
+	return separator;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -92,27 +116,32 @@ static NSUInteger showWithSeparator = 50;
 	return cell;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 
 
 #pragma mark - Bar item actions
 
 - (IBAction)didTapSeparatorSwitch:(UIBarButtonItem *)sender {
-	NSLog(@"wat: %@", sender);
-	self.showBelowSeparator = !self.showBelowSeparator;
+	self.expanded = !self.expanded;
 	[self.collectionView reloadData];
 }
 
+
+
+#pragma mark - JKSeparatorLayoutDelegate
+
+- (NSIndexPath *)indexPathForSeparator
+{
+	if (self.expanded) {
+		return [NSIndexPath indexPathForItem:numberOfItemsWithoutSeparator inSection:0];
+	}
+	
+	return nil;
+}
+
+- (BOOL)isValidIndexPathForItem:(NSIndexPath *)indexPath
+{
+	return indexPath.item < [self.collectionView numberOfItemsInSection:0];
+}
 
 
 

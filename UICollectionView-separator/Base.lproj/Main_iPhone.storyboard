@@ -26,11 +26,14 @@
                     <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="eeK-qN-qGN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="I6R-ok-dW0">
-                            <size key="itemSize" width="319" height="77"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="I6R-ok-dW0" customClass="JKSeparatorLayout">
+                            <size key="itemSize" width="320" height="56"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <connections>
+                                <outlet property="separatorLayoutDelegate" destination="Sqy-Ug-Aq0" id="J8g-Eu-A8S"/>
+                            </connections>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Cell" id="788-Wn-OP2" customClass="JKCell">
@@ -40,17 +43,23 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCJ-hs-9EZ">
-                                            <rect key="frame" x="20" y="20" width="280" height="21"/>
+                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lCJ-hs-9EZ">
+                                            <rect key="frame" x="20" y="0.0" width="280" height="64"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="lCJ-hs-9EZ" secondAttribute="bottom" id="0dS-uC-O1o"/>
+                                    <constraint firstAttribute="trailing" secondItem="lCJ-hs-9EZ" secondAttribute="trailing" constant="20" id="48X-34-RGD"/>
+                                    <constraint firstItem="lCJ-hs-9EZ" firstAttribute="leading" secondItem="788-Wn-OP2" secondAttribute="leading" constant="20" id="h7d-5v-IbC"/>
+                                    <constraint firstItem="lCJ-hs-9EZ" firstAttribute="top" secondItem="788-Wn-OP2" secondAttribute="top" id="lLY-rm-TPx"/>
+                                </constraints>
                                 <size key="customSize" width="320" height="64"/>
                                 <connections>
                                     <outlet property="label" destination="lCJ-hs-9EZ" id="gpr-Ti-jGO"/>
