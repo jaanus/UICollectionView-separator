@@ -109,7 +109,13 @@ NSString *const SeparatorViewKind = @"SeparatorViewKind";
 /// Check for index path validity, since layout math doesn’t know about the model.
 - (BOOL)isValidIndexPathForItem:(NSIndexPath *)indexPath;
 {
-	return indexPath.item < [self.collectionView numberOfItemsInSection:0];
+	NSInteger sections = [self.collectionView.dataSource numberOfSectionsInCollectionView:self.collectionView];
+	if (!(indexPath.section < sections)) {
+		return NO;
+	}
+	
+	NSInteger itemsInSection = [self.collectionView.dataSource collectionView:self.collectionView numberOfItemsInSection:indexPath.section];
+	return indexPath.item < itemsInSection;
 }
 
 - (CGSize)collectionViewContentSize
