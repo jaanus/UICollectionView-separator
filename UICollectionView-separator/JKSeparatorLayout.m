@@ -99,11 +99,17 @@ NSString *const SeparatorViewKind = @"SeparatorViewKind";
 {
 	// Our indexPathsForItemsInRect doesn’t know anything about item validity and may return
 	// index paths that are actually not in the collection view. So validate the path.
-	if (![self.separatorLayoutDelegate isValidIndexPathForItem:indexPath]) { return nil; }
+	if (![self isValidIndexPathForItem:indexPath]) { return nil; }
     
     UICollectionViewLayoutAttributes *a = [super layoutAttributesForItemAtIndexPath:indexPath];
     a.frame = [self adjustedFrameForAttributes:a];
     return a;
+}
+
+/// Check for index path validity, since layout math doesn’t know about the model.
+- (BOOL)isValidIndexPathForItem:(NSIndexPath *)indexPath;
+{
+	return indexPath.item < [self.collectionView numberOfItemsInSection:0];
 }
 
 - (CGSize)collectionViewContentSize
