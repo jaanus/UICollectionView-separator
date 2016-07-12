@@ -138,11 +138,5 @@ static NSUInteger numberOfItemsWithSeparator = 50;
 	return nil;
 }
 
-- (BOOL)isValidIndexPathForItem:(NSIndexPath *)indexPath
-{
-	return indexPath.item < [self.collectionView numberOfItemsInSection:0];
-}
-
-
 
 @end

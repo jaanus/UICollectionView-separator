@@ -19,9 +19,6 @@ FOUNDATION_EXPORT NSString *const SeparatorViewKind;
 /// Index path above which the separator should be shown, or nil if no separator is present.
 - (NSIndexPath *)indexPathForSeparator;
 
-/// Check for index path validity, since layout math doesn’t know about the model.
-- (BOOL)isValidIndexPathForItem:(NSIndexPath *)indexPath;
-
 @end
 
 
